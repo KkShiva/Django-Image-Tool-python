@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% block title %}Django Demo home page{% endblock %}
+{% block content %} 
+<style>
+    body {
+        {% load static %}
+        background-image: url("{% static 'myapp/images/BG.jpg' %}");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    h1 {
+            margin-top: 80px;
+            margin-left: 400px;
+            font-size: 4em;
+            color: rgb(0, 0, 0);
+        }
+</style>
+<h1 class="animate__animated animate__fadeInUp">HOME</h1>
+
+<div class="text-box" style="top: -20px; left: 300px;">
+    <p>hi welcome,</p> 
+    <p>This is project is made django setup, below are features.</p>
+    <ul>
+        <li>Free Cat Images API</li>
+        <li>Free Dog Images API</li>
+        <li>Image Filters</li>
+      </ul>
+      <p>View About for more informations.</p>
+    </div>
+
+{% endblock %}

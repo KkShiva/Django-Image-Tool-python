@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Base{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <style>
+       body {
+      color: white;
+      font-family: 'Teko', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      }
+      .text-box {
+       background-color: rgb(0, 0, 0); /* Black with 70% opacity */
+       border-radius: 5px;
+       padding: 20px;
+       max-width: 600px;
+       margin: 20px auto;
+       color: white;
+       font-size: 1.2em;
+       text-align: left;
+       animation: fadeIn 1.5s ease-in-out;
+       position: relative;
+       top: 50px; /* Y offset */
+       left: 300px; /* X offset */
+       font-weight: 300; /* Light 300 */
+       font-family: 'Teko', sans-serif; /* Ensure Teko is applied */
+       }
+       nav 
+       {
+                  background-color: rgba(0, 0, 0, 0.7);
+                  padding: 1em;
+                  display: flex;
+                  justify-content: flex-end;
+                  align-items: center;
+                  
+        } 
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        .side-menu-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-top: 70px;
+            padding-bottom: 60px;
+        }
+        .side-menu {
+        overflow-y: auto;
+        max-height: calc(100vh - 150px); /* Adjust to leave space for the nav and footer */
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        /* Hide scrollbar for Chrome, Safari, and Opera */
+        scrollbar-width: none; /* For Firefox */
+        }
+        .side-menu::-webkit-scrollbar {
+            display: none; /* For Chrome, Safari, and Opera */
+        }
+        .side-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 5px;
+            margin: 10px 0;
+            font-size: 1.5em;
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+        .side-menu a:hover {
+            background-color: white;
+            color: black;
+        }
+        h1 {
+            font-weight: 400; /* Regular 400 */
+        }
+        
+        h2 {
+            font-size: 48px;
+            font-weight: 400; /* Regular 400 */
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        h3 {
+            font-size: 36px;
+            font-weight: 400; /* Regular 400 */
+            margin-bottom: 15px;
+            color: white;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            text-align: center;
+        }
+        .input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .input-group input {
+        border-radius: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+    }
+    .input-group button {
+        border-radius: 20px;
+        padding: 10px 20px;
+        background-color: #f39c12;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+/* Styles for the chatbot container */
+.chatbot-container {
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 5px;
+        padding: 20px;
+        max-width: 600px;
+        margin: 20px auto;
+        color: white;
+        font-size: 1.2em;
+        text-align: left;
+        animation: fadeIn 1.5s ease-in-out;
+        position: relative;
+        top: 80px;
+        left: 400px;
+        font-weight: 300;
+        font-family: 'Teko', sans-serif;
+    }
+    .chatbot-output {
+        margin-top: 10px;
+        font-size: 1.5em;
+        color: #f39c12;
+    }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+        </div>
+    </nav>
+
+
+    
+    {% block content %}
+    <style>
+        body {
+            {% load static %}
+            background-image: url("{% static 'myapp/images/BG.jpg' %}");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+    <h1 class="animate__animated animate__fadeInUp">WELCOME TO PUBLIC API APP</h1>
+
+    <p class="animate__animated animate__fadeIn">hi</p>
+    {% endblock %}
+
+    <div class="side-menu-container">
+        <div class="side-menu">
+            <a href="{% url 'cats' %}">Cats API</a>
+            <a href="{% url 'Dogs' %}">Dogs API</a>
+            <a href="{% url 'image_filter' %}">Python Image Filter</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            <a href="#">DUMMY</a>
+            
+            <!-- Add more menu items as needed -->
+        </div>
+    </div>
+
+
+    <footer>
+        Made by Shiva
+    </footer>
+</body>
+</html>

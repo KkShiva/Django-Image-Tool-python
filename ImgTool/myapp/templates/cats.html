@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}CAT Page{% endblock %}
+{% block content %} 
+<style>
+    body {
+        {% load static %}
+        background-image: url("{% static 'myapp/images/cat.jpg' %}");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    h1 {
+            margin-top: 50px;
+            margin-left: 550px;
+            font-size: 6em;
+            color: rgb(0, 0, 0);
+        }
+    .container {
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 5px;
+       padding: 20px;
+       max-width: 600px;
+       margin: 20px auto;
+       color: white;
+       font-size: 1.2em;
+       text-align: left;
+       animation: fadeIn 1.5s ease-in-out;
+       position: relative;
+       top: 50px; /* Y offset */
+       left: 400px; /* X offset */
+       font-weight: 300; /* Light 300 */
+       font-family: 'Teko', sans-serif; /* Ensure Teko is applied */
+        
+    }
+
+</style>
+
+<h1 class="animate__animated animate__fadeInUp">CATS</h1>
+
+<div class="container">
+    <div class="input-group">
+        <button onclick="window.location.href='/cat'">Random Cat</button>
+    </div>
+    <div class="input-group">
+        <input type="text" id="cat-tag" placeholder="Enter tag">
+        <button onclick="window.location.href='/cat/' + document.getElementById('cat-tag').value">Cat by Tag</button>
+    </div>
+    <div class="input-group">
+        <button onclick="window.location.href='/cat/gif'">Cat GIF</button>
+    </div>
+    <div class="input-group">
+        <input type="text" id="cat-text" placeholder="Enter text">
+        <button onclick="window.location.href='/cat/says/' + document.getElementById('cat-text').value">Cat Says</button>
+    </div>
+    <div class="input-group">
+        <input type="text" id="cat-says-text" placeholder="Enter text">
+        <input type="text" id="font-size" placeholder="Font size">
+        <input type="color" id="font-color" value="#000000">
+        <button onclick="window.location.href='/cat/says/' + document.getElementById('cat-says-text').value + '?fontSize=' + document.getElementById('font-size').value + '&fontColor=' + document.getElementById('font-color').value.slice(1)">Cat Says with Style</button>
+    </div>
+</div>
+
+<!-- Chatbot container -->
+<div class="chatbot-container">
+    <div id="chatbot-output" class="chatbot-output"></div>
+    <div class="input-group">
+        <input type="text" id="chatbot-input" placeholder="Ask the cat something...">
+        <button onclick="generateMeow()">Meow</button>
+    </div>
+    
+</div>
+<div class="text-box" style="top: 100px; left: 00px;">
+    <p>The cat (Felis catus), commonly referred to as the domestic cat or house cat, is a small domesticated carnivorous mammal. It is the only domesticated species of the family Felidae. Recent advances in archaeology and genetics have shown that the domestication of the cat occurred in the Near East around 7500 BC. It is commonly kept as a house pet and farm cat, but also ranges freely as a feral cat avoiding human contact. Valued by humans for companionship and its ability to kill vermin, the cat's retractable claws are adapted to killing small prey like mice and rats. It has a strong, flexible body, quick reflexes, and sharp teeth, and its night vision and sense of smell are well developed. It is a social species, but a solitary hunter and a crepuscular predator. Cat communication includes vocalizations like meowing, purring, trilling, hissing, growling, and grunting as well as cat body language. It can hear sounds too faint or too high in frequency for human ears, such as those made by small mammals. It secretes and perceives pheromones.</p>
+</div>
+<script>
+    function generateMeow() {
+        const input = document.getElementById('chatbot-input').value;
+        const output = document.getElementById('chatbot-output');
+        
+        if (input.trim() !== '') {
+            const meowCount = Math.floor(Math.random() * 30) + 1; // Random number between 1 and 10
+            let meows = '';
+            for (let i = 0; i < meowCount; i++) {
+                meows += 'meow ';
+            }
+            output.textContent = meows;
+        } else {
+            output.textContent = 'Please enter something for the cat!';
+        }
+    }
+</script>
+
+{% endblock %}

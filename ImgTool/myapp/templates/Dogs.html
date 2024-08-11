@@ -1,0 +1,88 @@
+{% extends "base.html" %}{% block title %}Dogs Page{% endblock %}
+{% block content %} 
+<style>
+    body {
+        {% load static %}
+        background-image: url("{% static 'myapp/images/dog.jpg' %}");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    h1 {
+            margin-top: 50px;
+            margin-left: 300px;
+            font-size: 4em;
+            color: rgb(0, 0, 0);
+        }
+        .container {
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 5px;
+       padding: 20px;
+       max-width: 600px;
+       margin: 20px auto;
+       color: white;
+       font-size: 1.2em;
+       text-align: left;
+       animation: fadeIn 1.5s ease-in-out;
+       position: relative;
+       top: 50px; /* Y offset */
+       left: 400px; /* X offset */
+       font-weight: 300; /* Light 300 */
+       font-family: 'Teko', sans-serif; /* Ensure Teko is applied */
+        
+    }
+    .input-group button {
+        background-color: #029d0a;
+        color: white;
+    }
+    .chatbot-output {
+        color: #029d0a;
+    }
+</style>
+<h1 class="animate__animated animate__fadeInUp">DOGS</h1>
+
+<div class="container">
+    <!-- Fetch a random dog image -->
+    <div class="input-group">
+        <button onclick="window.location.href='/dog'">Random Dog</button>
+    </div>
+    
+    <!-- Fetch a random dog image by breed -->
+    <div class="input-group">
+        <input type="text" id="dog-breed" placeholder="Enter breed (e.g., husky)">
+        <button onclick="window.location.href='/dog/' + document.getElementById('dog-breed').value">Dog by Breed</button>
+    </div>
+</div>
+
+<!-- Chatbot container -->
+<div class="chatbot-container">
+    <div id="chatbot-output" class="chatbot-output"></div>
+    <div class="input-group">
+        <input type="text" id="chatbot-input" placeholder="Ask the dog something...">
+        <button onclick="generateMeow()">Bark</button>
+    </div>
+    
+</div>
+<div class="text-box" style="top: 100px; left: 00px;">
+    <p>The dog (Canis familiaris or Canis lupus familiaris) is a domesticated descendant of the wolf. Also called the domestic dog, it was domesticated from an extinct population of Pleistocene wolves over 14,000 years ago. The dog was the first species to be domesticated by humans. Experts estimate that hunter-gatherers domesticated dogs more than 15,000 years ago, which was before the development of agriculture. Due to their long association with humans, dogs have expanded to a large number of domestic individuals and gained the ability to thrive on a starch-rich diet that would be inadequate for other canids.</p>
+</div>
+<script>
+    function generateMeow() {
+        const input = document.getElementById('chatbot-input').value;
+        const output = document.getElementById('chatbot-output');
+        
+        if (input.trim() !== '') {
+            const meowCount = Math.floor(Math.random() * 30) + 1; // Random number between 1 and 10
+            let meows = '';
+            for (let i = 0; i < meowCount; i++) {
+                meows += 'bark ';
+            }
+            output.textContent = meows;
+        } else {
+            output.textContent = 'Please enter something for the Dog!';
+        }
+    }
+</script>
+
+{% endblock %}
